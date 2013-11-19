@@ -13,6 +13,10 @@ public component function init(string orientation = 'portrait'
 	return this;
 }
 
+public void function appendPageBreakToBody(){
+	ArrayAppend(variables.body_parts, '<div style="page-break-after:always"></div>');
+}
+
 public void function appendToBody(required string html){
 	ArrayAppend(variables.body_parts, arguments.html);
 }
@@ -30,10 +34,28 @@ public void function setFooter(required string footerHTML){
 	variables.footerHTML = arguments.footerHTML;
 }
 
+private string function getFooter(){
+	return replaceDocumentVars(variables.footerHTML);
+}
+
+private string function getHeader(){
+	return replaceDocumentVars(variables.headerHTML);
+}
+
 private string function replaceDocumentVars(required string html){
-	/* Variables that should be dealt with:
-		$currentPageNumber$
-		$totalPageCount$
+	var htmlInProgress = arguments.html;
+	var varMap = documentVariableMapping();
+	for( var key in varMap ){
+		htmlInProgress = ReplaceNoCase(htmlInProgress, key, varMap[key], 'all');
+	}
+
+	return htmlInProgress;
+}
+
+private struct function documentVariableMapping(){
+	/*
+	return { '$currentPageNumber$' = '[page]'
+		,	'$totalPageCount$' = '[topage]'};
 	*/
 	throw(type="unimplementedFunction"
 		message="This function needs to be implemented by children classes");

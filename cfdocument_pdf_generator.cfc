@@ -1,15 +1,21 @@
 <cfcomponent extends="base_pdf_generator">
 
+<cfscript>
+public void function appendPageBreakToBody(){
+	ArrayAppend(variables.body_parts, '<pagebreak>');
+}
+</cfscript>
+
 <cffunction name="generate" returntype="void" output="true" access="public">
 	<cfdocument attributeCollection="#cfDocAttrs()#">
 		<cfif StructKeyExists(variables, 'headerHTML')>
 			<cfdocumentitem type="header">
-				#replaceDocumentVars(variables.headerHTML)#
+				#getHeader()#
 			</cfdocumentitem>
 		</cfif>
 		<cfif StructKeyExists(variables, 'footerHTML')>
 			<cfdocumentitem type="footer">
-				#replaceDocumentVars(variables.footerHTML)#
+				#getFooter()#
 			</cfdocumentitem>
 		</cfif>
 
@@ -35,14 +41,9 @@ private struct function cfDocAttrs(){
 	return attrs;
 }
 
-private string function replaceDocumentVars(required string html){
-	return ReplaceNoCase(ReplaceNoCase(
-			arguments.html
-			, '$currentPageNumber$'
-			, cfdocument.currentpagenumber
-		), '$totalPageCount$'
-		, cfdocument.totalpagecount
-	);
+private struct function documentVariableMapping(){
+	return { '$currentPageNumber$' = cfdocument.currentpagenumber
+		,	'$totalPageCount$' = cfdocument.totalpagecount };
 }
 
 </cfscript>
