@@ -1,6 +1,6 @@
 <cfcomponent extends="base_pdf_generator">
 
-<cffunction name="generatePDF" returntype="void" output="true" access="public">
+<cffunction name="generate" returntype="void" output="true" access="public">
 	<cfdocument attributeCollection="#cfDocAttrs()#">
 		<cfif StructKeyExists(variables, 'headerHTML')>
 			<cfdocumentitem type="header">

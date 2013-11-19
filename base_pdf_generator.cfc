@@ -17,7 +17,7 @@ public void function appendToBody(required string html){
 	ArrayAppend(variables.body_parts, arguments.html);
 }
 
-public void function generatePDF(){
+public void function generate(){
 	//PDF Generation
 }
 
