@@ -22,7 +22,7 @@
 	<cfset ArrayAppend(execArgs, outFile)>
 
 	<cfexecute name="/usr/local/bin/wkhtmltopdf" arguments="#ArrayToList(execArgs, ' ')#" timeout="2"></cfexecute>
-	<cfcontent type="application/pdf" file="#outFile#">
+	<cfcontent type="application/pdf" reset="true" file="#outFile#">
 </cffunction>
 
 <cfscript>
@@ -37,6 +37,10 @@ private array function baseExecArgs(){
 }
 
 private struct function documentVariableMapping(){
+	/* The javascript here is an adaptation of some code in "Footers And Headers"
+		https://github.com/antialize/wkhtmltopdf/blob/master/README_WKHTMLTOPDF#L312-L332
+
+		The replacement values are in the query string for the document */
 	return { '$currentPageNumber$' = '<script>document.write(("&" + document.location.search.substring(1) ).split("&page=")[1].split("&")[0]);</script>'
 		,	'$totalPageCount$' = '<script>document.write(("&" + document.location.search.substring(1) ).split("topage=")[1].split("&")[0]);</script>'};
 }
