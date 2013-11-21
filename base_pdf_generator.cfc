@@ -1,8 +1,8 @@
 component {
 
-public component function init(string orientation = 'portrait'
+public component function init(string orientation = 'Portrait'
 		, struct margins = {}
-		, string pageType = 'letter'){
+		, string pageType = 'Letter'){
 
 	variables.body_parts = [];
 
@@ -14,7 +14,7 @@ public component function init(string orientation = 'portrait'
 }
 
 public void function appendPageBreakToBody(){
-	ArrayAppend(variables.body_parts, '<div style="page-break-after:always"></div>');
+	ArrayAppend(variables.body_parts, '<div style="page-break-after:always; display: block; clear: both;"></div>');
 }
 
 public void function appendToBody(required string html){
