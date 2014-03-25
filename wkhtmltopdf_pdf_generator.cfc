@@ -21,7 +21,7 @@
 	<cfset var outFile = uniqueTempFile('pdf')>
 	<cfset ArrayAppend(execArgs, outFile)>
 
-	<cfexecute name="/usr/local/bin/wkhtmltopdf" arguments="#ArrayToList(execArgs, ' ')#" timeout="30"></cfexecute>
+	<cfexecute name="/usr/local/bin/wkhtmltopdf" arguments="#ArrayToList(execArgs, ' ')#" timeout="#variables.executeTimeout#"></cfexecute>
 	<cfcontent type="application/pdf" reset="true" file="#outFile#">
 </cffunction>
 
