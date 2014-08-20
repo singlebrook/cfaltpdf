@@ -58,7 +58,7 @@ private struct function documentVariableMapping(){
 	return { '$currentPageNumber$' = '[page]'
 		,	'$totalPageCount$' = '[topage]'};
 	*/
-	throw(type="unimplementedFunction"
+	throw(type="unimplementedFunction",
 		message="This function needs to be implemented by children classes");
 }
 
