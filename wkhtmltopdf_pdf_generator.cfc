@@ -33,6 +33,9 @@ private array function baseExecArgs(){
 	for( var key in variables.margins ){
 		ArrayAppend(args, '--margin-#key# #variables.margins[key]#');
 	}
+	for( var key in variables.addlOptions ){
+		ArrayAppend(args, '--#key# #variables.addlOptions[key]#');
+	}
 	return args;
 }
 

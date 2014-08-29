@@ -3,11 +3,12 @@ component {
 public component function init(string orientation = 'Portrait'
 		, struct margins = {}
 		, string pageType = 'Letter'
-		, numeric executeTimeout = 30){
+		, numeric executeTimeout = 30
+		, struct addlOptions = {}){
 
 	variables.body_parts = [];
 
-	for( var key in ['orientation', 'margins', 'pageType', 'executeTimeout'] ){
+	for( var key in ['orientation', 'margins', 'pageType', 'executeTimeout', 'addlOptions'] ){
 		variables[key] = arguments[key];
 	}
 
