@@ -1,6 +1,13 @@
 <cfcomponent extends="base_pdf_generator">
 
+<!--- generate a PDF and push it to the output stream --->
 <cffunction name="generate" returntype="void" output="true" access="public">
+	<cfset outFile = generateFile()>
+	<cfcontent type="application/pdf" reset="true" file="#outFile#">
+</cffunction>
+
+<!--- generate a PDF in a tmp file and return the full path to the file --->
+<cffunction name="generateFile" returntype="string" output="false" access="public">
 	<cfset var execArgs = baseExecArgs()>
 
 	<cfif StructKeyExists(variables, 'headerHTML')>
@@ -22,7 +29,7 @@
 	<cfset ArrayAppend(execArgs, outFile)>
 
 	<cfexecute name="/usr/local/bin/wkhtmltopdf" arguments="#ArrayToList(execArgs, ' ')#" timeout="#variables.executeTimeout#"></cfexecute>
-	<cfcontent type="application/pdf" reset="true" file="#outFile#">
+	<cfreturn outFile>
 </cffunction>
 
 <cfscript>
