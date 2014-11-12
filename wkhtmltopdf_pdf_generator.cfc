@@ -2,7 +2,7 @@
 
 <!--- generate a PDF and push it to the output stream --->
 <cffunction name="generate" returntype="void" output="true" access="public">
-	<cfset outFile = generateFile()>
+	<cfset var outFile = generateFile()>
 	<cfcontent type="application/pdf" reset="true" file="#outFile#">
 </cffunction>
 
