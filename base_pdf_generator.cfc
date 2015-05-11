@@ -20,7 +20,7 @@ public void function appendPageBreakToBody(){
 }
 
 public void function appendToBody(required string html){
-	ArrayAppend(variables.body_parts, arguments.html);
+	ArrayAppend(variables.body_parts, cleanHTML(arguments.html));
 }
 
 public void function generate(){
@@ -34,6 +34,11 @@ public void function setHeader(required string headerHTML){
 
 public void function setFooter(required string footerHTML){
 	variables.footerHTML = arguments.footerHTML;
+}
+
+private string function cleanHTML(required string html){
+	var clean = Replace(arguments.html, '†', '&dagger;', 'all');
+	return clean;
 }
 
 private string function getFooter(){
