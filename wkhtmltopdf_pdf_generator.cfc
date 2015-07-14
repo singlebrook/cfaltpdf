@@ -35,8 +35,11 @@
 <cfscript>
 
 private array function baseExecArgs(){
-	var args = [ '--page-size #variables.pagetype#'
-		, '--orientation #variables.orientation#' ];
+	var args = [
+			'--page-size #variables.pagetype#'
+		, '--orientation #variables.orientation#'
+		, '--encoding utf-8'
+	];
 	for( var key in variables.margins ){
 		ArrayAppend(args, '--margin-#key# #variables.margins[key]#');
 	}
